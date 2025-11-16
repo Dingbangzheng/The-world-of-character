@@ -22,7 +22,11 @@ int main(){
         cout  <<  "Checking for updates..."  <<  endl;
         //todo
     }
-    cout  <<  "Load and start game.dll..."  <<  endl;
-    //todo
+    #if defined(_WIN32) || defined(_WIN64)
+        cout  <<  "Load and start game.dll..."  <<  endl;
+        //todo
+    #else
+        cout  <<  "Load and start game.so..."  <<  endl;
+    #endif
     return 0;
 }
