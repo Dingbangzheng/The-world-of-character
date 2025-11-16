@@ -20,9 +20,8 @@ int main(){
     cout  <<  "Checking network connection..."  <<  endl;
     if(check_network_connection()){
         cout  <<  "Checking for updates..."  <<  endl;
-    }else{
-        cout  <<  "Load and start game.dll..."  <<  endl;
-        //todo
     }
+    cout  <<  "Load and start game.dll..."  <<  endl;
+    //todo
     return 0;
 }
