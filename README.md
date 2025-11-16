@@ -5,5 +5,7 @@ The-world-of-character是一个开放世界2D游戏，支持热更新，是一�
 [Linux]支持ANSI转译序列的终端，需要系统有curl  
 [MacOS]目前不提供官方支持。  
 # 备注
-开发必备软件:https://github.com/niXman/mingw-builds-binaries/releases;https://www.7-zip.org/a/7z2501-x64.exe。
-VC_redist.x86.exe是Windows开发必须的运行库。
+开发必备软件  
+https://github.com/niXman/mingw-builds-binaries/releases. 
+https://www.7-zip.org/a/7z2501-x64.exe。
+自带的VC_redist.x86.exe是Windows开发必须的运行库。
