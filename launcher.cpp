@@ -27,6 +27,7 @@ int main(){
         //todo
     #else
         cout  <<  "Load and start game.so..."  <<  endl;
+        //todo
     #endif
     return 0;
 }
