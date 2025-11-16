@@ -8,4 +8,4 @@ The-world-of-character是一个开放世界2D游戏，支持热更新，是一�
 开发必备软件  
 https://github.com/niXman/mingw-builds-binaries/releases  
 https://www.7-zip.org/a/7z2501-x64.exe  
-自带的VC_redist.x86.exe是Windows开发必须的运行库。
+本仓库自带的VC_redist.x86.exe是Windows开发必须的运行库。
