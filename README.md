@@ -5,7 +5,7 @@ The-world-of-character是一个开放世界2D字符游戏，支持热更新。
 [Linux]支持ANSI转译序列的终端，需要系统有curl  
 [MacOS]目前不提供官方支持。  
 # Q&A
-1,Windows端提示无法启动程序？
+1,Windows端提示无法启动程序？  
 --运行自带的VC_redist.x86.exe安装必须的运行库即可。
 # 备注
 [Windows开发必备软件]  
