@@ -21,7 +21,7 @@ int main(){
     if(check_network_connection()){
         cout  <<  "Checking for updates..."  <<  endl;
         string where = string("curl -s -L -O dingbangzheng.cn/twoc/") + to_string(x) + string(".y.z/latest_version.txt");
-	system(where.c_str());
+	    system(where.c_str());
     }
     #if defined(_WIN32) || defined(_WIN64)
         cout  <<  "Load and start game.dll..."  <<  endl;
