@@ -22,6 +22,7 @@ int main(){
         cout  <<  "Checking for updates..."  <<  endl;
         string where = string("curl -s -L -O dingbangzheng.cn/twoc/") + to_string(x) + string(".y.z/latest_version.txt");
 	    system(where.c_str());
+		//todo
     }
     #if defined(_WIN32) || defined(_WIN64)
         cout  <<  "Load and start game.dll..."  <<  endl;
