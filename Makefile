@@ -1,12 +1,17 @@
 all:
-	$(MAKE) launcher
-launcher: launcher.cpp
 ifeq ($(OS),Windows_NT)
-	g++ launcher.cpp -o launcher.exe -std=c++14
-	cp ./VC_redist.x86.exe ./game/
-	mv ./launcher.exe ./game/
+	del ./game/.gitkeep /f /q
 else
-	g++ launcher.cpp -o launcher
-	mv ./launcher ./game/
-endif
 	rm -rf ./game/.gitkeep
+endif                                                                                                                            
+	$(MAKE) launcher                                                                                                               
+launcher: launcher.cpp                                                                                                            
+ifeq ($(OS),Windows_NT)                                                                                                                
+	g++ launcher.cpp -o launcher.exe -std=c++14                                                                                    
+	xcopy ./VC_redist.x86.exe ./game/ /e /h /y                                                                                                 
+	move ./launcher.exe ./game/                                                                                                      
+else                                                                                                                                   
+	g++ launcher.cpp -o launcher                                                                                                   
+	mv ./launcher ./game/                                                                                                          
+endif
+                                                                                             
