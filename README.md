@@ -1,7 +1,7 @@
 # The-world-of-character
 The-world-of-character是一个开放世界2D字符游戏，支持热更新。
 # 兼容性
-[Windows]支持ANSI转译序列的Windows(Windows10的10周年纪念版)，需要系统有curl  
+[Windows]支持ANSI转译序列的Windows(Windows10的10周年纪念版及以上)，需要系统有curl  
 [Linux]支持ANSI转译序列的终端，需要系统有curl  
 [MacOS]目前不提供官方支持。  
 # Q&A
