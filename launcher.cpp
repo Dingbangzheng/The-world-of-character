@@ -9,6 +9,10 @@ int ly,lz = 0;
 #if defined(_WIN32) || defined(_WIN64)
     #include <windows.h>
     #define PING_CMD "ping -n 1 dingbangzheng.cn > nul"
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    DWORD dwMode = 0;
+    GetConsoleMode(hOut, &dwMode);
+    SetConsoleMode(hOut, dwMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
 #else
     #include <unistd.h>
     #define PING_CMD "ping -c 1 dingbangzheng.cn > /dev/null 2>&1"
