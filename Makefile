@@ -1,3 +1,9 @@
+.SUFFIXES:
+%:: %,v
+%:: RCS/%,v
+%:: RCS/%
+%:: s.%
+%:: SCCS/s.%
 all:
 ifeq ($(OS),Windows_NT)
 	del .\game\.gitkeep /f /q
