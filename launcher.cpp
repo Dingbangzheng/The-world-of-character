@@ -47,7 +47,7 @@ int main(){
 	    filesystem::remove("./latest_version.txt");
         }else{
             ofstream file("./logs.txt");
-            file << "ERROR[From=launcher,ID=1]:Can not find \"latest_version.txt\"."  << endl;
+            file << "ERROR[From=launcher,ID=1]:Can not find \"latest_version.txt\"."  <<  endl;
 	    file.close();
             cout << "ERROR[From=launcher,ID=1]:Can not find \"latest_version.txt\"."  <<  endl;
         }
