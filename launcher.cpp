@@ -30,27 +30,27 @@ int main(){
         system(where.c_str());
         if(filesystem::exists("./version.txt")){
             ifstream file("./version.txt");
-	    string version;
-	    getline(file,version);
-	    file.close();
-	    sscanf(version.c_str(),".%d.%d",&y,&z);
+            string version;
+            getline(file,version);
+            file.close();
+            sscanf(version.c_str(),".%d.%d",&y,&z);
         }else{
             ofstream file("./version.txt");
-	    file << "." << y << "." << z;
-	    file.close();
+            file << "." << y << "." << z;
+            file.close();
         }
-	if(filesystem::exists("./latest_version.txt")){
+        if(filesystem::exists("./latest_version.txt")){
             ifstream file("./latest_version.txt");
-	    string latest_version;
-	    getline(file,latest_version);
-	    file.close();
-	    sscanf(latest_version.c_str(),".%d.%d",&ly,&lz);
-	    filesystem::remove("./latest_version.txt");
+            string latest_version;
+            getline(file,latest_version);
+            file.close();
+            sscanf(latest_version.c_str(),".%d.%d",&ly,&lz);
+            filesystem::remove("./latest_version.txt");
         }else{
             ofstream file("./logs.txt");
             time_t timestamp = time(nullptr);
             file <<  timestamp  <<  "-ERROR[From=launcher,ID=1]:Can not find \"latest_version.txt\"."  <<  endl;
-	    file.close();
+            file.close();
             cout << "ERROR[From=launcher,ID=1]:Can not find \"latest_version.txt\"."  <<  endl;
         }
         if(ly > y || lz > z){
