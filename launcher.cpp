@@ -15,6 +15,7 @@ int ly,lz = 0;
 #endif
 #include <filesystem>
 #include <fstream>
+#include <ctime>
 int check_network_connection() {
     int result = system(PING_CMD);
     return (result == 0) ? 1 : 0;
@@ -47,7 +48,8 @@ int main(){
 	    filesystem::remove("./latest_version.txt");
         }else{
             ofstream file("./logs.txt");
-            file << "ERROR[From=launcher,ID=1]:Can not find \"latest_version.txt\"."  <<  endl;
+            time_t timestamp = time(nullptr);
+            file <<  timestamp  <<  "-ERROR[From=launcher,ID=1]:Can not find \"latest_version.txt\"."  <<  endl;
 	    file.close();
             cout << "ERROR[From=launcher,ID=1]:Can not find \"latest_version.txt\"."  <<  endl;
         }
