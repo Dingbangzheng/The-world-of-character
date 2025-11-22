@@ -6,7 +6,7 @@ int z = 1;
 int ly,lz = 0;
 #include <cstdlib>
 #include <string>
-#ifdef _WIN32
+#if defined(_WIN32) || defined(_WIN64)
     #include <windows.h>
     #define PING_CMD "ping -n 1 dingbangzheng.cn > nul"
 #else
