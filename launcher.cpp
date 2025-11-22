@@ -46,7 +46,10 @@ int main(){
 	    sscanf(latest_version.c_str(),".%d.%d",&ly,&lz);
 	    filesystem::remove("./latest_version.txt");
         }else{
-            cout << "ERROR[From=launcher,ID=1]:Can not find \"latest_version.txt\".";
+            ofstream file("./logs.txt");
+            file << "ERROR[From=launcher,ID=1]:Can not find \"latest_version.txt\"."  << endl;
+	    file.close();
+            cout << "ERROR[From=launcher,ID=1]:Can not find \"latest_version.txt\"."  <<  endl;
         }
         if(ly > y || lz > z){
             //todo
