@@ -24,6 +24,7 @@ int main(){
     cout  <<  "Checking network connection..."  <<  endl;
     if(check_network_connection()){
         cout  <<  "Checking for updates..."  <<  endl;
+        filesystem::remove("./latest_version.txt");
         string where = string("curl -s -L -O dingbangzheng.cn/twoc/") + to_string(x) + string(".y.z/latest_version.txt");
         system(where.c_str());
         if(filesystem::exists("./version.txt")){
@@ -37,7 +38,19 @@ int main(){
 	    file << "." << y << "." << z;
 	    file.close();
         }
-	//todo
+	if(filesystem::exists("./latest_version.txt")){
+            ifstream file("./latest_version.txt");
+	    string latest_version;
+	    getline(file,latest_version);
+	    file.close();
+	    sscanf(latest_version.c_str(),".%d.%d",&ly,&lz);
+	    filesystem::remove("./latest_version.txt");
+        }else{
+            cout << "ERROR[From=launcher,ID=1]:Can not find \"latest_version.txt\".";
+        }
+        if(ly > y || lz > z){
+            //todo
+        }
     }
     #if defined(_WIN32) || defined(_WIN64)
         cout  <<  "Load and start game.dll..."  <<  endl;
