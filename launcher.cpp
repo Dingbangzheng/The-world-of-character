@@ -9,10 +9,6 @@ int ly,lz = 0;
 #if defined(_WIN32) || defined(_WIN64)
     #include <windows.h>
     #define PING_CMD "ping -n 1 dingbangzheng.cn > nul"
-    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-    DWORD dwMode = 0;
-    GetConsoleMode(hOut, &dwMode);
-    SetConsoleMode(hOut, dwMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
 #else
     #include <unistd.h>
     #define PING_CMD "ping -c 1 dingbangzheng.cn > /dev/null 2>&1"
@@ -25,6 +21,12 @@ int check_network_connection() {
     return (result == 0) ? 1 : 0;
 }
 int main(){
+    #if defined(_WIN32)  ||  defined(_WIN64)
+        HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+        DWORD dwMode = 0;
+        GetConsoleMode(hOut, &dwMode);
+        SetConsoleMode(hOut, dwMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
+    #endif
     cout  <<  "The world of character Launcher"  <<  endl;
     cout  <<  "Check network connection..."  <<  endl;
     if(check_network_connection()){
@@ -66,6 +68,9 @@ int main(){
                 ifstream file("./updatedata.txt");
                 string name;
                 while(getline(file,name)){
+                    if(!name.empty()  &&  name.back()  ==  '\r'){
+                        name.pop_back();
+                    }
                     cout  <<  "Remove old \"" <<  name;
                     #if defined(_WIN32) || defined(_WIN64)
                     cout  <<  ".dll\"."  <<  endl;
@@ -77,6 +82,11 @@ int main(){
                     //todo
                 }
                 filesystem::remove("./updatedata.txt");
+                y = ly;
+		z = lz;
+		ofstream file2("./version.txt");
+		file2  <<  "."  <<  y  <<  "."  <<  z  <<endl;
+                file2.close();
             }else{
                 //todo
             }
