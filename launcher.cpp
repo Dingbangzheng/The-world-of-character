@@ -59,6 +59,8 @@ int main(){
         }
         if(ly > y || lz > z){
             cout  <<  "Download updatedata..."  <<  endl;
+            where = string("curl -s -L -O dingbangzheng.cn/twoc/") + to_string(x) + string(".y.z/updatedata.txt");
+            system(where.c_str());
             //todo
         }else{
             cout  <<  "No updates."  <<  endl;
