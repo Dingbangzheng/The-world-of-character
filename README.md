@@ -16,4 +16,3 @@ https://www.7-zip.org/a/7z2501-x64.exe
 本仓库自带的VC_redist.x86.exe是Windows开发必须的运行库。  
 [Linux开发必备软件]  
 g++  
-make  
