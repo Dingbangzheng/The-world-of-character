@@ -74,18 +74,18 @@ int main(){
                     cout  <<  "Remove old \"" <<  name;
                     #if defined(_WIN32) || defined(_WIN64)
                     cout  <<  ".dll\"."  <<  endl;
-		    filesystem::remove("./data/"+name+".dll");
+                    filesystem::remove("./data/"+name+".dll");
                     #else
                     cout  <<  ".so\"."  <<  endl;
-		    filesystem::remove("./data/"+name+".so");
+                    filesystem::remove("./data/"+name+".so");
                     #endif
                     //todo
                 }
                 filesystem::remove("./updatedata.txt");
                 y = ly;
-		z = lz;
-		ofstream file2("./version.txt");
-		file2  <<  "."  <<  y  <<  "."  <<  z  <<endl;
+                z = lz;
+                ofstream file2("./version.txt");
+                file2  <<  "."  <<  y  <<  "."  <<  z  <<endl;
                 file2.close();
             }else{
                 //todo
