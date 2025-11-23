@@ -26,9 +26,9 @@ int check_network_connection() {
 }
 int main(){
     cout  <<  "The world of character Launcher"  <<  endl;
-    cout  <<  "Checking network connection..."  <<  endl;
+    cout  <<  "Check network connection..."  <<  endl;
     if(check_network_connection()){
-        cout  <<  "Checking for updates..."  <<  endl;
+        cout  <<  "Pass and check for updates..."  <<  endl;
         filesystem::remove("./latest_version.txt");
         string where = string("curl -s -L -O dingbangzheng.cn/twoc/") + to_string(x) + string(".y.z/latest_version.txt");
         system(where.c_str());
@@ -53,13 +53,18 @@ int main(){
         }else{
             ofstream file("./logs.txt");
             time_t timestamp = time(nullptr);
-            file <<  timestamp  <<  "-ERROR[From=launcher,ID=1]:Can not find \"latest_version.txt\"."  <<  endl;
+            file <<  timestamp  <<  "-ERROR[From=launcher,ID=1]:Can not find \"latest_version.txt\" or there is no \"curl\" command."  <<  endl;
             file.close();
-            cout << "ERROR[From=launcher,ID=1]:Can not find \"latest_version.txt\"."  <<  endl;
+            cout << "ERROR[From=launcher,ID=1]:Can not find \"latest_version.txt\" or there is no \"curl\" command."  <<  endl;
         }
         if(ly > y || lz > z){
+            cout  <<  "Download updatedata..."  <<  endl;
             //todo
+        }else{
+            cout  <<  "No updates."  <<  endl;
         }
+    }else{
+        cout << "Not pass."  <<  endl;
     }
     #if defined(_WIN32) || defined(_WIN64)
         cout  <<  "Load and start game.dll..."  <<  endl;
