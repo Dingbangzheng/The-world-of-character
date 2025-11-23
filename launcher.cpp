@@ -58,10 +58,28 @@ int main(){
             cout << "ERROR[From=launcher,ID=1]:Can not find \"latest_version.txt\" or there is no \"curl\" command."  <<  endl;
         }
         if(ly > y || lz > z){
+            filesystem::remove("./updatedata.txt");
             cout  <<  "Download updatedata..."  <<  endl;
             where = string("curl -s -L -O dingbangzheng.cn/twoc/") + to_string(x) + string(".y.z/updatedata.txt");
             system(where.c_str());
-            //todo
+            if(filesystem::exists("./updatedata.txt")){
+                ifstream file("./updatedata.txt");
+                string name;
+                while(getline(file,name)){
+                    cout  <<  "Remove old \"" <<  name;
+                    #if defined(_WIN32) || defined(_WIN64)
+                    cout  <<  ".dll\"."  <<  endl;
+		    filesystem::remove("./data/"+name+".dll");
+                    #else
+                    cout  <<  ".so\"."  <<  endl;
+		    filesystem::remove("./data/"+name+".so");
+                    #endif
+                    //todo
+                }
+                filesystem::remove("./updatedata.txt");
+            }else{
+                //todo
+            }
         }else{
             cout  <<  "No updates."  <<  endl;
         }
