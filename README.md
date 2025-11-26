@@ -13,6 +13,6 @@ A:因为Makefile中进行移动，拷贝，删除文件使用的是cmd的指令�
 [Windows开发必备软件]  
 https://github.com/niXman/mingw-builds-binaries/releases  
 https://www.7-zip.org/a/7z2501-x64.exe  
-本仓库自带的VC_redist.x86.exe是Windows开发必须的运行库。  
+本仓库自带的VC_redist.x86.exe是Windows开发必须的运行库(Microsoft Visual C++ Redistributable)。  
 [Linux开发必备软件]  
 g++  
