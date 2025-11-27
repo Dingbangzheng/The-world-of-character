@@ -28,6 +28,10 @@ int main(){
         SetConsoleMode(hOut, dwMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
     #endif
     cout  <<  "The world of character Launcher"  <<  endl;
+    ofstream file("./logs.txt");
+    time_t timestamp = time(nullptr);
+    file <<  timestamp  <<  "-Info[From=launcher]:Game is start."  <<  endl;
+    file.close();
     cout  <<  "Check network connection..."  <<  endl;
     if(check_network_connection()){
         cout  <<  "Pass and check for updates..."  <<  endl;
@@ -54,7 +58,7 @@ int main(){
             filesystem::remove("./latest_version.txt");
         }else{
             ofstream file("./logs.txt");
-            time_t timestamp = time(nullptr);
+            timestamp = time(nullptr);
             file <<  timestamp  <<  "-ERROR[From=launcher,ID=1]:Can not find \"latest_version.txt\" or there is no \"curl\" command."  <<  endl;
             file.close();
             cout << "ERROR[From=launcher,ID=1]:Can not find \"latest_version.txt\" or there is no \"curl\" command."  <<  endl;
@@ -74,12 +78,17 @@ int main(){
                     cout  <<  "Remove old \"" <<  name;
                     #if defined(_WIN32) || defined(_WIN64)
                     cout  <<  ".dll\"."  <<  endl;
-                    filesystem::remove("./data/"+name+".dll");
+                    filesystem::remove("./data/" + name + ".dll");
+		    cout  <<  "Download and install \""  <<  name  <<  ".dll\"."  <<  endl;
+                    where = string("curl -s -L -o ./data/" + name + ".dll dingbangzheng.cn/twoc/") + to_string(x) + string(".y.z/" + name + ".dll");
+		    system(where.c_str());
                     #else
                     cout  <<  ".so\"."  <<  endl;
-                    filesystem::remove("./data/"+name+".so");
+                    filesystem::remove("./data/" + name + ".so");
+                    cout  <<  "Download and install \""  <<  name  <<  ".so\"."  <<  endl;
+                    where = string("curl -s -L -o ./data/" + name + ".so dingbangzheng.cn/twoc/") + to_string(x) + string(".y.z/" + name + ".so");
+                    system(where.c_str());
                     #endif
-                    //todo
                 }
                 filesystem::remove("./updatedata.txt");
                 y = ly;
@@ -88,7 +97,11 @@ int main(){
                 file2  <<  "."  <<  y  <<  "."  <<  z  <<endl;
                 file2.close();
             }else{
-                //todo
+                ofstream file("./logs.txt");
+		timestamp = time(nullptr);
+                file <<  timestamp  <<  "-ERROR[From=launcher,ID=2]:Can not find \"updatedata.txt\" or there is no \"curl\" command."  <<  endl;
+                file.close();
+                cout << "ERROR[From=launcher,ID=2]:Can not find \"updatedata.txt\" or there is no \"curl\" command."  <<  endl;
             }
         }else{
             cout  <<  "No updates."  <<  endl;
