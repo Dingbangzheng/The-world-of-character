@@ -6,6 +6,7 @@ int z = 1;
 int ly,lz = 0;
 void cls(){
     cout  <<  "\033[2J\033[H";
+	return;
 }
 #include <cstdlib>
 #include <string>
