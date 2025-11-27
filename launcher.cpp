@@ -4,6 +4,9 @@ int x = 0;
 int y = 0;
 int z = 1;
 int ly,lz = 0;
+void cls(){
+    cout  <<  "\033[2J\033[H";
+}
 #include <cstdlib>
 #include <string>
 #if defined(_WIN32) || defined(_WIN64)
@@ -26,7 +29,8 @@ int main(){
         DWORD dwMode = 0;
         GetConsoleMode(hOut, &dwMode);
         SetConsoleMode(hOut, dwMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
-    #endif
+    #endi
+    cls();
     cout  <<  "The world of character Launcher"  <<  endl;
     ofstream file("./logs.txt");
     time_t timestamp = time(nullptr);
