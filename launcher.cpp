@@ -30,7 +30,7 @@ int main(){
         DWORD dwMode = 0;
         GetConsoleMode(hOut, &dwMode);
         SetConsoleMode(hOut, dwMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
-    #endi
+    #endif
     cls();
     cout  <<  "The world of character Launcher"  <<  endl;
     ofstream file("./logs.txt");
