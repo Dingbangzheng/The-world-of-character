@@ -1,4 +1,4 @@
 # /bin/bash
+mkdir ./game/
 mkdir ./game/data/
-g++ -std=c++17 launcher.cpp -o launcher
-mv launcher ./game/
+g++ -std=c++17 ./src/launcher.cpp -o ./game/launcher

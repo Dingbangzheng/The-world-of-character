@@ -1,5 +1,4 @@
 # /bin/bash
-rm -rf ./game/.gitkeep
+mkdir ./game/
 mkdir ./game/data/
-g++ -std=c++17 launcher.cpp -o launcher -O3 -Wall
-mv launcher ./game/
+g++ -std=c++17 ./src/launcher.cpp -o ./game/launcher -O3 -Wall
