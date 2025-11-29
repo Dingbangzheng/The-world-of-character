@@ -10,6 +10,7 @@
     #define PING_CMD "ping -n 1 dingbangzheng.cn > nul"
 #else
     #include <unistd.h>
+    #include <dlfcn.h>
     #define PING_CMD "ping -c 1 dingbangzheng.cn > /dev/null 2>&1"
 #endif
 
@@ -35,15 +36,14 @@ int main() {
         GetConsoleMode(hOut, &dwMode);
         SetConsoleMode(hOut, dwMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
     #endif
+
+    std::ofstream file("./logs.txt");
+    std::time_t timestamp = std::time(nullptr);
+    file << timestamp << "-INFO[From=launcher,ID=un]:Game is start." << std::endl;
+    file.close();
     
     cls();
     std::cout << "The world of character Launcher" << std::endl;
-    
-    std::ofstream file("./logs.txt");
-    std::time_t timestamp = std::time(nullptr);
-    file << timestamp << "-Info[From=launcher]:Game is start." << std::endl;
-    file.close();
-    
     std::cout << "Check network connection..." << std::endl;
     
     if (check_network_connection()) {
@@ -130,10 +130,46 @@ int main() {
     
     #if defined(_WIN32) || defined(_WIN64)
         std::cout << "Load and start game.dll..." << std::endl;
-        //todo
+        HINSTANCE hDll = LoadLibrary("./data/game.dll");
+        if (!hDll){
+            std::ofstream file("./logs.txt");
+            timestamp = std::time(nullptr);
+            file << timestamp << "-ERROR[From=launcher,ID=3]:Can not find \"./data/game.dll\"." << std::endl;
+            file.close();
+            std::cout << "ERROR[From=launcher,ID=3]:Can not find \"./data/game.dll\"." << std::endl;
+        }
+        auto game = (void(*)())GetProcAddress(hDll, "game");
+        if(game){
+            game();
+        }else{
+            std::ofstream file("./logs.txt");
+	    timestamp = std::time(nullptr);
+	    file << timestamp << "-ERROR[From=launcher,ID=4]:Can not find \"game();\" from \"./data/game.dll\"." << std::endl;
+            file.close();
+	    std::cout << "ERROR[From=launcher,ID=4]:Can not find \"game();\" from \"./data/game.dll\"." << std::endl;
+        }
+        FreeLibrary(hDll);
     #else
         std::cout << "Load and start game.so..." << std::endl;
-        //todo
+        void* lib = dlopen("./data/game.so", RTLD_LAZY);
+        if (!lib){
+            std::ofstream file("./logs.txt");
+            timestamp = std::time(nullptr);
+            file << timestamp << "-ERROR[From=launcher,ID=3]:Can not find \"./data/game.so\"." << std::endl;
+            file.close();
+            std::cout << "ERROR[From=launcher,ID=3]:Can not find \"./data/game.so\"." << std::endl;
+        }
+        auto game = (void(*)())dlsym(lib, "game");
+        if(game){
+            game();
+        }else{
+            std::ofstream file("./logs.txt");
+            timestamp = std::time(nullptr);
+            file << timestamp << "-ERROR[From=launcher,ID=4]:Can not find \"game();\" from \"./data/game.so\"." << std::endl;
+            file.close();
+            std::cout << "ERROR[From=launcher,ID=4]:Can not find \"game();\" from \"./data/game.so\"." << std::endl;
+        }
+	dlclose(lib);
     #endif
     
     return 0;
