@@ -4,6 +4,7 @@
 #include <filesystem>
 #include <fstream>
 #include <ctime>
+#include "cls.h"
 #if defined(_WIN32) || defined(_WIN64)
     #include <windows.h>
     #define PING_CMD "ping -n 1 dingbangzheng.cn > nul"
@@ -16,10 +17,6 @@ int x = 0;
 int y = 0;
 int z = 1;
 int ly, lz = 0;
-void cls() {
-    std::cout << "\033[2J\033[H";
-    return;
-}
 int check_network_connection() {
     int result = std::system(PING_CMD);
     return (result == 0) ? 1 : 0;
