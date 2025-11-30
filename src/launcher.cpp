@@ -30,7 +30,7 @@ int main() {
     #endif
     std::ofstream file("./logs.txt", std::ios::app);
     std::time_t timestamp = std::time(nullptr);
-    file << timestamp << "-INFO[From=launcher,ID=un]:Game is start." << std::endl;
+    file << timestamp << "-INFO[From=launcher,ID=un]:Game is start.Version:\"" << x << "." << y << "." << z << "\"." << std::endl;
     file.close();
     cls();
     std::cout << "The world of character Launcher" << std::endl;
@@ -93,11 +93,14 @@ int main() {
                     #endif
                 }
                 std::filesystem::remove("./updatedata.txt");
+                std::ofstream file2("./logs.txt");
+                timestamp = std::time(nullptr);
+                file2 << timestamp << "-INFO[From=launcher,ID=un]:Game is update from \"" << x << "." << y << "." << z << "\" to \"" << x << "." << y << "." << z << "\"." << std::endl;
                 y = ly;
                 z = lz;
-                std::ofstream file2("./version.txt");
-                file2 << "." << y << "." << z << std::endl;
-                file2.close();
+                std::ofstream file3("./version.txt");
+                file3 << "." << y << "." << z << std::endl;
+                file3.close();
             } else {
                 std::ofstream file("./logs.txt", std::ios::app);
                 timestamp = std::time(nullptr);
