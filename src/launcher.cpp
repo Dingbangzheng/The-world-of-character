@@ -1,3 +1,13 @@
+/***
+ * Name:launcher.cpp
+ * Version(TWOC):0.0.1
+ * Copyleft (C)2025 The TWOC Foundation*,License under GNU General Public License version 3.0 .
+ * By:
+ *     Dingbangzheng <1596664178@qq.com>
+ * Introduce:
+ *     This is the launcher of TWOC.
+ * *The TWOC Foundation is a non-profit organization.TWOC means The world of character(https://github.com/Dingbangzheng/The-world-of-character).
+ ***/
 #include <iostream>
 #include <cstdlib>
 #include <string>
