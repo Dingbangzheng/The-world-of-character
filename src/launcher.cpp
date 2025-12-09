@@ -1,7 +1,7 @@
 /***
  * Name:launcher.cpp
  * Version(TWOC):0.0.1
- * Copyleft (C)2025 The TWOC Team*,License under GNU General Public License version 3.0 .
+ * Copyleft (C)2025 The TWOC Team*,License under GNU General Public License version 3.0 or later.
  * By:
  *     Dingbangzheng <1596664178@qq.com>
  * Introduce:
