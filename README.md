@@ -15,3 +15,5 @@ https://www.7-zip.org/a/7z2501-x64.exe
 [Linux开发必备软件]  
 g++  
 make
+# 编译
+在源码根目录执行""make help""或""make""来查看编译提示，按照提示按需编译。编译成功后游戏在"./game/"中。
