@@ -1,5 +1,5 @@
 # The-world-of-character
-The-world-of-character是一个开放世界2D字符游戏，支持热更新。
+The-world-of-character是一个开放世界2D字符游戏，支持热更新。  
 # 兼容性
 [Windows]支持ANSI转译序列的Windows，需要系统有curl(C:\Windows\System32\curl.exe)  
 [Linux]支持ANSI转译序列的终端，需要系统有curl  
@@ -16,4 +16,4 @@ https://www.7-zip.org/a/7z2501-x64.exe
 g++  
 make
 # 编译
-在源码根目录执行""make help""或""make""来查看编译提示，按照提示按需编译。编译成功后游戏在"./game/"中。
+在源码根目录执行""make help""或""make""来查看编译提示，按照提示按需编译。编译成功后游戏在"./game/"中。  
