@@ -1,19 +1,15 @@
 # The-world-of-character
-The-world-of-character是一个开放世界2D字符游戏，支持热更新。
-# 兼容性
-[Windows]支持ANSI转译序列的Windows，需要系统有curl(C:\Windows\System32\curl.exe)  
-[Linux]支持ANSI转译序列的终端，需要系统有curl  
-[MacOS]目前不提供官方支持。  
-# Q&A
-F:Windows端提示无法启动程序？  
-A:运行自带的VC_redist.x86.exe安装必须的运行库(Microsoft Visual C++ Redistributable)即可。  
-# 备注
-[Windows开发必备软件]  
-https://github.com/niXman/mingw-builds-binaries/releases  
-https://www.7-zip.org/a/7z2501-x64.exe  
-本仓库自带的VC_redist.x86.exe是Windows开发必须的运行库(Microsoft Visual C++ Redistributable)。  
-[Linux开发必备软件]  
-g++  
+The-world-of-character is an open-world 2D character game that supports hot updates.
+# Compatibility
+[Windows] Windows that supports ANSI escape sequences, and the system needs to have curl (C:\Windows\System32\curl.exe)
+[Linux] Terminals that support ANSI escape sequences, and the system needs to have curl
+[MacOS] Official support is not currently provided. # Q&A
+F: Windows prompts that the program cannot be started?
+A: Just run the included VC_redist.x86.exe to install the necessary runtime library (Microsoft Visual C++ Redistributable).
+# Note
+[Essential software for Windows development] https://github.com/niXman/mingw-builds-binaries/releases
+https://www.7-zip.org/a/7z2501-x64.exe
+The VC_redist.x86.exe included in this repository is the essential runtime library (Microsoft Visual C++ Redistributable) for Windows development.
+[Essential software for Linux development] g++
 make
-# 编译
-在源码根目录执行""make help""或""make""来查看编译提示，按照提示按需编译。编译成功后游戏在"./game/"中。
+To compile, run "make help" or "make" in the root directory of the source code to view the compilation instructions, and compile as needed according to the prompts. After successful compilation, the game will be in the "./game/" directory.
