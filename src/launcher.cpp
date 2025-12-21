@@ -37,7 +37,7 @@ int main() {
         GetConsoleMode(hOut, &dwMode);
         SetConsoleMode(hOut, dwMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
     #endif
-    std::ofstream file("./logs.txt", std::ios::app);
+    std::ofstream file("./logs.txt",std::ios::app);
     std::time_t timestamp = std::time(nullptr);
     file << timestamp << "-INFO[From=launcher,ID=un]:Game is start.Version:\"" << x << "." << y << "." << z << "\"." << std::endl;
     file.close();
@@ -68,7 +68,7 @@ int main() {
             std::sscanf(latest_version.c_str(), ".%d.%d", &ly, &lz);
             std::filesystem::remove("./latest_version.txt");
         } else {
-            std::ofstream file("./logs.txt", std::ios::app);
+            std::ofstream file("./logs.txt",std::ios::app);
             timestamp = std::time(nullptr);
             file << timestamp << "-ERROR[From=launcher,ID=1]:Can not find \"latest_version.txt\" or there is no \"curl\" command." << std::endl;
             file.close();
@@ -93,25 +93,35 @@ int main() {
                         std::cout << "Download and install \"" << name << ".dll\"." << std::endl;
                         where = std::string("curl -s -L -o ./data/" + name + ".dll dingbangzheng.cn/twoc/") + std::to_string(x) + std::string(".y.z/" + name + ".dll");
                         std::system(where.c_str());
+                        std::ofstream file2("./logs.txt",std::ios::app);
+                        timestamp = std::time(nullptr);
+                        file2 << timestamp << "-INFO[From=launcher,ID=un]:Update \"" << name << ".dll\"." << std::endl;
+                        file2.close();
                     #else
                         std::cout << ".so\"." << std::endl;
                         std::filesystem::remove("./data/" + name + ".so");
                         std::cout << "Download and install \"" << name << ".so\"." << std::endl;
                         where = std::string("curl -s -L -o ./data/" + name + ".so dingbangzheng.cn/twoc/") + std::to_string(x) + std::string(".y.z/" + name + ".so");
                         std::system(where.c_str());
+                        std::ofstream file2("./logs.txt",std::ios::app);
+                        timestamp = std::time(nullptr);
+                        file2 << timestamp << "-INFO[From=launcher,ID=un]:Update \"" << name << ".so\"." << std::endl;
+                        file2.close();
                     #endif
                 }
+		file.close();
                 std::filesystem::remove("./updatedata.txt");
-                std::ofstream file2("./logs.txt");
+                std::ofstream file2("./logs.txt",std::ios::app);
                 timestamp = std::time(nullptr);
-                file2 << timestamp << "-INFO[From=launcher,ID=un]:Game is update from \"" << x << "." << y << "." << z << "\" to \"" << x << "." << y << "." << z << "\"." << std::endl;
+                file2 << timestamp << "-INFO[From=launcher,ID=un]:Game is update from \"" << x << "." << y << "." << z << "\" to \"" << x << "." << ly << "." << lz << "\"." << std::endl;
+                file2.close();
                 y = ly;
                 z = lz;
                 std::ofstream file3("./version.txt");
                 file3 << "." << y << "." << z << std::endl;
                 file3.close();
             } else {
-                std::ofstream file("./logs.txt", std::ios::app);
+                std::ofstream file("./logs.txt",std::ios::app);
                 timestamp = std::time(nullptr);
                 file << timestamp << "-ERROR[From=launcher,ID=2]:Can not find \"updatedata.txt\" or there is no \"curl\" command." << std::endl;
                 file.close();
@@ -127,7 +137,7 @@ int main() {
         std::cout << "Load and start game.dll..." << std::endl;
         HINSTANCE hDll = LoadLibrary("./data/game.dll");
         if (!hDll){
-            std::ofstream file("./logs.txt", std::ios::app);
+            std::ofstream file("./logs.txt",std::ios::app);
             timestamp = std::time(nullptr);
             file << timestamp << "-ERROR[From=launcher,ID=3]:Can not find \"./data/game.dll\"." << std::endl;
             file.close();
@@ -137,7 +147,7 @@ int main() {
         if(game){
             game();
         }else{
-            std::ofstream file("./logs.txt", std::ios::app);
+            std::ofstream file("./logs.txt",std::ios::app);
             timestamp = std::time(nullptr);
             file << timestamp << "-ERROR[From=launcher,ID=4]:Can not find \"game();\" from \"./data/game.dll\"." << std::endl;
             file.close();
@@ -148,7 +158,7 @@ int main() {
         std::cout << "Load and start game.so..." << std::endl;
         void* lib = dlopen("./data/game.so", RTLD_LAZY);
         if (!lib){
-            std::ofstream file("./logs.txt", std::ios::app);
+            std::ofstream file("./logs.txt",std::ios::app);
             timestamp = std::time(nullptr);
             file << timestamp << "-ERROR[From=launcher,ID=3]:Can not find \"./data/game.so\"." << std::endl;
             file.close();
@@ -158,7 +168,7 @@ int main() {
         if(game){
             game();
         }else{
-            std::ofstream file("./logs.txt", std::ios::app);
+            std::ofstream file("./logs.txt",std::ios::app);
             timestamp = std::time(nullptr);
             file << timestamp << "-ERROR[From=launcher,ID=4]:Can not find \"game();\" from \"./data/game.so\"." << std::endl;
             file.close();

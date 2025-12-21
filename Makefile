@@ -8,24 +8,27 @@ help:
 	@echo "make clean -- Clean up the compiled files(./game/*)."
 	@echo "PS:The compiled files are placed in the "./game/" directory."
 
-all:./src/cls.h ./src/launcher.cpp ./src/game.cpp
+all:
+	$(MAKE) launcher
+	$(MAKE) library
+
+launcher:./src/cls.h ./src/launcher.cpp
 ifeq ($(OS),Windows_NT)
 	mkdir .\game
-	mkdir .\game\data
-	g++ -std=c++17 .\src\launcher.cpp -o .\game\launcher.exe -lpsapi
-	g++ -shared -o .\game\data\game.dll .\src\game.cpp
+	g++ -std=c++17 -lpsapi .\src\launcher.cpp -o .\game\launcher.exe
 else
 	mkdir ./game/
-	mkdir ./game/data/
-	g++ -std=c++17 ./src/launcher.cpp -o ./game/launcher -ldl
-	g++ -shared -fPIC -o ./game/data/game.so ./src/game.cpp
+	g++ -std=c++17 -ldl ./src/launcher.cpp -o ./game/launcher
 endif
 
-launcher:
-	//todo
-
-library:
-	//todo
+library:./src/cls.h ./src/game.cpp
+ifeq ($(OS),Windows_NT)
+	mkdir .\game\data
+	g++ -std=c++17 -shared -lpsapi -o .\game\data\game.dll .\src\game.cpp
+else
+	mkdir ./game/data/
+	g++ -std=c++17 -shared -ldl -fPIC -o ./game/data/game.so ./src/game.cpp
+endif
 
 clean:
 ifeq ($(OS),Windows_NT)
