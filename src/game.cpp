@@ -8,13 +8,32 @@
  * ** The TWOC Team is a non-profit organization.
  ***/
 #include <iostream>
-#include "cls.h"
+#include "tool.h"
+#include "input.h"
 extern "C"{
     #if defined(_WIN32) || defined(_WIN64)
         __declspec(dllexport)
     #endif
+    input input_obj;
     void game(){
         cls();
-        //todo
+        using namespace std;
+        while(1){
+            home();
+            cout << "The world of character" << endl;
+            cout << "1 -- Start single-player game" << endl;
+            cout << "2 -- Connect servers" << endl;
+            cout << "3 -- Exit" << endl;
+            if(input::kbhit()){
+                char ch = input::getch();
+                if(ch == '1'){
+                    //todo
+		}else if(ch == '2'){
+                    //todo
+                }else if(ch == '3'){
+                    return;
+                }
+            }
+        }
     }
 }

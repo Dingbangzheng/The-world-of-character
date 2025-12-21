@@ -12,7 +12,7 @@ all:
 	$(MAKE) launcher
 	$(MAKE) library
 
-launcher:./src/cls.h ./src/launcher.cpp
+launcher:./src/tool.h ./src/launcher.cpp
 ifeq ($(OS),Windows_NT)
 	mkdir .\game
 	g++ -std=c++17 -lpsapi .\src\launcher.cpp -o .\game\launcher.exe
@@ -21,7 +21,7 @@ else
 	g++ -std=c++17 -ldl ./src/launcher.cpp -o ./game/launcher
 endif
 
-library:./src/cls.h ./src/game.cpp
+library:./src/tool.h ./src/game.cpp
 ifeq ($(OS),Windows_NT)
 	mkdir .\game\data
 	g++ -std=c++17 -shared -lpsapi -o .\game\data\game.dll .\src\game.cpp

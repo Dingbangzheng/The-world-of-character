@@ -13,7 +13,7 @@
 #include <filesystem>
 #include <fstream>
 #include <ctime>
-#include "cls.h"
+#include "tool.h"
 #if defined(_WIN32) || defined(_WIN64)
     #include <windows.h>
     #define PING_CMD "ping -n 1 dingbangzheng.cn > nul"
@@ -176,5 +176,6 @@ int main() {
         }
         dlclose(lib);
     #endif
+    cls();
     return 0;
 }

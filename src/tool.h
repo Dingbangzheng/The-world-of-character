@@ -8,7 +8,11 @@
  * ** The TWOC Team is a non-profit organization.
  ***/
 #include <iostream>
-void cls() {
+void cls(){
     std::cout << "\033[2J\033[H";
+    return;
+}
+void home(){
+    std::cout << "\033[H";
     return;
 }
