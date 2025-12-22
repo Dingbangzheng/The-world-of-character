@@ -1,5 +1,5 @@
 /***
- * Name:tool.h
+ * Name:screen.h
  * Copyleft (C)2025 The TWOC Team**,License under GNU General Public License version 3.0 or later.
  * Authors:
  *     Dingbangzheng <1596664178@qq.com>

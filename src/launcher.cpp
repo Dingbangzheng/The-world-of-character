@@ -12,7 +12,7 @@
 #include <filesystem>
 #include <fstream>
 #include <ctime>
-#include "tool.h"
+#include "screen.h"
 #if defined(_WIN32) || defined(_WIN64)
     #include <windows.h>
     #define PING_CMD "ping -n 1 dingbangzheng.cn > nul"

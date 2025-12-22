@@ -7,14 +7,15 @@
  * ** The TWOC Team is a non-profit organization.
  ***/
 #include <iostream>
-#include "tool.h"
+#include <filesystem>
+#include "screen.h"
 #include "input.h"
 extern "C"{
     #if defined(_WIN32) || defined(_WIN64)
         __declspec(dllexport)
     #endif
-    input input_obj;
     void game(){
+        input input_obj;
         cls();
         using namespace std;
         while(1){
@@ -27,7 +28,7 @@ extern "C"{
                 char ch = input::getch();
                 if(ch == '1'){
                     //todo
-		}else if(ch == '2'){
+                }else if(ch == '2'){
                     //todo
                 }else if(ch == '3'){
                     return;
