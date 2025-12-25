@@ -141,16 +141,17 @@ int main() {
             file << timestamp << "-ERROR[From=launcher,ID=3]:Can not find \"./data/game.dll\"." << std::endl;
             file.close();
             std::cout << "ERROR[From=launcher,ID=3]:Can not find \"./data/game.dll\"." << std::endl;
-        }
-        auto game = (void(*)())GetProcAddress(hDll, "game");
-        if(game){
-            game();
         }else{
-            std::ofstream file("./logs.txt",std::ios::app);
-            timestamp = std::time(nullptr);
-            file << timestamp << "-ERROR[From=launcher,ID=4]:Can not find \"game();\" from \"./data/game.dll\"." << std::endl;
-            file.close();
-            std::cout << "ERROR[From=launcher,ID=4]:Can not find \"game();\" from \"./data/game.dll\"." << std::endl;
+            auto game = (void(*)())GetProcAddress(hDll, "game");
+            if(game){
+                game();
+            }else{
+                std::ofstream file("./logs.txt",std::ios::app);
+                timestamp = std::time(nullptr);
+                file << timestamp << "-ERROR[From=launcher,ID=4]:Can not find \"game();\" from \"./data/game.dll\"." << std::endl;
+                file.close();
+                std::cout << "ERROR[From=launcher,ID=4]:Can not find \"game();\" from \"./data/game.dll\"." << std::endl;
+            }
         }
         FreeLibrary(hDll);
     #else
@@ -162,19 +163,19 @@ int main() {
             file << timestamp << "-ERROR[From=launcher,ID=3]:Can not find \"./data/game.so\"." << std::endl;
             file.close();
             std::cout << "ERROR[From=launcher,ID=3]:Can not find \"./data/game.so\"." << std::endl;
-        }
-        auto game = (void(*)())dlsym(lib, "game");
-        if(game){
-            game();
         }else{
-            std::ofstream file("./logs.txt",std::ios::app);
-            timestamp = std::time(nullptr);
-            file << timestamp << "-ERROR[From=launcher,ID=4]:Can not find \"game();\" from \"./data/game.so\"." << std::endl;
-            file.close();
-            std::cout << "ERROR[From=launcher,ID=4]:Can not find \"game();\" from \"./data/game.so\"." << std::endl;
+            auto game = (void(*)())dlsym(lib, "game");
+            if(game){
+                game();
+            }else{
+                std::ofstream file("./logs.txt",std::ios::app);
+                timestamp = std::time(nullptr);
+                file << timestamp << "-ERROR[From=launcher,ID=4]:Can not find \"game();\" from \"./data/game.so\"." << std::endl;
+                file.close();
+                std::cout << "ERROR[From=launcher,ID=4]:Can not find \"game();\" from \"./data/game.so\"." << std::endl;
+            }
         }
         dlclose(lib);
     #endif
-    cls();
     return 0;
 }

@@ -31,9 +31,10 @@ extern "C"{
                 }else if(ch == '2'){
                     //todo
                 }else if(ch == '3'){
-                    return;
+                    break;
                 }
             }
         }
+        cls();
     }
 }
