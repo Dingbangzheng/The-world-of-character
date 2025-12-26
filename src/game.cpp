@@ -10,6 +10,12 @@
 #include <filesystem>
 #include "screen.h"
 #include "input.h"
+#if defined(_WIN32) || defined(_WIN64)
+    #include <windows.h>
+#else
+    #include <unistd.h>
+    #include <dlfcn.h>
+#endif
 extern "C"{
     #if defined(_WIN32) || defined(_WIN64)
         __declspec(dllexport)
