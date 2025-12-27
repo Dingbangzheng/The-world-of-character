@@ -24,7 +24,7 @@ endif
 library:./src/screen.h ./src/game.cpp
 ifeq ($(OS),Windows_NT)
 	mkdir .\game\data
-	g++ -std=c++17 -shared -lpsapi -o .\game\data\game.dll .\src\game.cpp
+	g++ -std=c++17 -shared -lpsapi -o .\game\data\game.dll .\src\game.cpp -Wl,--enable-auto-import
 else
 	mkdir ./game/data/
 	g++ -std=c++17 -shared -ldl -fPIC -o ./game/data/game.so ./src/game.cpp
