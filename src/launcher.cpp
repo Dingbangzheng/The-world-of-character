@@ -25,6 +25,29 @@ int x = 0;
 int y = 0;
 int z = 1;
 int ly, lz = 0;
+extern "C" {
+    #if defined(_WIN32) || defined(_WIN64)
+    __declspec(dllexport)
+    #endif
+    int* getversionx() {
+        static int* ptr = &x;
+        return ptr;
+    }
+    #if defined(_WIN32) || defined(_WIN64)
+    __declspec(dllexport)
+    #endif
+    int* getversiony() {
+        static int* ptr = &y;
+        return ptr;
+    }
+    #if defined(_WIN32) || defined(_WIN64)
+    __declspec(dllexport)
+    #endif
+    int* getversionz() {
+        static int* ptr = &z;
+        return ptr;
+    }
+}
 int check_network_connection() {
     int result = std::system(PING_CMD);
     return (result == 0) ? 1 : 0;

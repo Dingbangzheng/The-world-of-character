@@ -18,7 +18,7 @@ ifeq ($(OS),Windows_NT)
 	g++ -std=c++17 -lpsapi .\src\launcher.cpp -o .\game\launcher.exe
 else
 	mkdir ./game/
-	g++ -std=c++17 -ldl ./src/launcher.cpp -o ./game/launcher
+	g++ -std=c++17 -rdynamic -ldl ./src/launcher.cpp -o ./game/launcher
 endif
 
 library:./src/screen.h ./src/game.cpp
