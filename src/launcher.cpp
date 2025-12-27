@@ -36,6 +36,7 @@ int main() {
         GetConsoleMode(hOut, &dwMode);
         SetConsoleMode(hOut, dwMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
     #endif
+    hidecursor();
     std::ofstream file("./logs.txt",std::ios::app);
     std::time_t timestamp = std::time(nullptr);
     file << timestamp << "-INFO[From=launcher,ID=un]:Game is start.Version:\"" << x << "." << y << "." << z << "\"." << std::endl;
@@ -177,5 +178,6 @@ int main() {
         }
         dlclose(lib);
     #endif
+    showcursor();
     return 0;
 }

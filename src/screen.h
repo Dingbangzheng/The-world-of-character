@@ -7,6 +7,14 @@
  * ** The TWOC Team is a non-profit organization.
  ***/
 #include <iostream>
+void hidecursor(){
+    std::cout << "\033[?25l";
+    return;
+}
+void showcursor(){
+    std::cout << "\033[?25h";
+    return;
+}
 void cls(){
     std::cout << "\033[2J\033[H";
     return;
