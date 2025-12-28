@@ -12,27 +12,29 @@ all:
 	$(MAKE) launcher
 	$(MAKE) library
 
-launcher:./src/screen.h ./src/launcher.cpp
+launcher: ./src/screen.h ./src/launcher.cpp
 ifeq ($(OS),Windows_NT)
-	mkdir .\game
+	@if not exist .\game mkdir .\game
 	g++ -std=c++17 -lpsapi .\src\launcher.cpp -o .\game\launcher.exe
 else
-	mkdir ./game/
+	@if [ ! -d ./game ]; then mkdir -p ./game; fi
 	g++ -std=c++17 -rdynamic -ldl ./src/launcher.cpp -o ./game/launcher
 endif
 
-library:./src/screen.h ./src/game.cpp
+library: ./src/screen.h ./src/game.cpp
 ifeq ($(OS),Windows_NT)
-	mkdir .\game\data
+	@if not exist .\game\data mkdir .\game\data
 	g++ -std=c++17 -shared -lpsapi -o .\game\data\game.dll .\src\game.cpp
 else
-	mkdir ./game/data/
+	@if [ ! -d ./game/data ]; then mkdir -p ./game/data; fi
 	g++ -std=c++17 -shared -ldl -fPIC -o ./game/data/game.so ./src/game.cpp
 endif
 
 clean:
 ifeq ($(OS),Windows_NT)
-	rmdir /s /q .\game
+	if exist .\game rmdir /s /q .\game
 else
 	rm -rf ./game/
 endif
+
+.PHONY: help all launcher library clean
