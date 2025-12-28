@@ -20,29 +20,14 @@ extern "C" {
     #if defined(_WIN32) || defined(_WIN64)
         __declspec(dllexport)
     #endif
-    int* getversionx();
-    #if defined(_WIN32) || defined(_WIN64)
-        __declspec(dllexport)
-    #endif
-    int* getversiony();
-    #if defined(_WIN32) || defined(_WIN64)
-        __declspec(dllexport)
-    #endif
-    int* getversionz();
-    #if defined(_WIN32) || defined(_WIN64)
-        __declspec(dllexport)
-    #endif
-    void game(){
+    void game(int x , int y , int z){
         input input_obj;
-	int* x = getversionx();
-	int* y = getversiony();
-	int* z = getversionz();
         cls();
         using namespace std;
         while(1){
             home();
             cout << "The world of character" << endl;
-            cout << "Version:" << *x << "." << *y << "." << *z << endl;
+            cout << "Version:" << x << "." << y << "." << z << endl;
             cout << "1 -- Start single-player game" << endl;
             cout << "2 -- Connect servers" << endl;
             cout << "3 -- Exit" << endl;

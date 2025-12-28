@@ -24,30 +24,7 @@
 int x = 0;
 int y = 0;
 int z = 1;
-int ly, lz = 0;
-extern "C" {
-    #if defined(_WIN32) || defined(_WIN64)
-    __declspec(dllexport)
-    #endif
-    int* getversionx() {
-        static int* ptr = &x;
-        return ptr;
-    }
-    #if defined(_WIN32) || defined(_WIN64)
-    __declspec(dllexport)
-    #endif
-    int* getversiony() {
-        static int* ptr = &y;
-        return ptr;
-    }
-    #if defined(_WIN32) || defined(_WIN64)
-    __declspec(dllexport)
-    #endif
-    int* getversionz() {
-        static int* ptr = &z;
-        return ptr;
-    }
-}
+int ly = 0 , lz = 0;
 int check_network_connection() {
     int result = std::system(PING_CMD);
     return (result == 0) ? 1 : 0;
@@ -166,9 +143,9 @@ int main() {
             file.close();
             std::cout << "ERROR[From=launcher,ID=3]:Can not find \"./data/game.dll\"." << std::endl;
         }else{
-            auto game = (void(*)())GetProcAddress(hDll, "game");
+            auto game = (void(*)(int x , int y ,int z))GetProcAddress(hDll, "game");
             if(game){
-                game();
+                game(x , y , z);
             }else{
                 std::ofstream file("./logs.txt",std::ios::app);
                 timestamp = std::time(nullptr);
@@ -188,9 +165,9 @@ int main() {
             file.close();
             std::cout << "ERROR[From=launcher,ID=3]:Can not find \"./data/game.so\"." << std::endl;
         }else{
-            auto game = (void(*)())dlsym(lib, "game");
+            auto game = (void(*)(int x , int y , int z))dlsym(lib, "game");
             if(game){
-                game();
+                game(x , y , z);
             }else{
                 std::ofstream file("./logs.txt",std::ios::app);
                 timestamp = std::time(nullptr);
