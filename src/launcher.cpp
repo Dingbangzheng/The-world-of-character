@@ -15,16 +15,17 @@
 #include "screen.h"
 #if defined(_WIN32) || defined(_WIN64)
     #include <windows.h>
-    #define PING_CMD "ping -n 1 dingbangzheng.cn > nul"
+    #define PING_CMD "ping -n 1 8.8.8.8 > nul"
 #else
     #include <unistd.h>
     #include <dlfcn.h>
-    #define PING_CMD "ping -c 1 dingbangzheng.cn > /dev/null 2>&1"
+    #define PING_CMD "ping -c 1 8.8.8.8 > /dev/null 2>&1"
 #endif
 int x = 0;
 int y = 0;
 int z = 1;
 int ly = 0 , lz = 0;
+std::string server = "dingbangzheng.cn/twoc/";
 int check_network_connection() {
     int result = std::system(PING_CMD);
     return (result == 0) ? 1 : 0;
@@ -44,10 +45,19 @@ int main() {
     cls();
     std::cout << "The world of character Launcher" << std::endl;
     std::cout << "Check network connection..." << std::endl;
+    if (std::filesystem::exists("./server.txt")) {
+        std::ifstream file("./server.txt");
+        std::getline(file, server);
+        file.close();
+    }else {
+        std::ofstream file("./server.txt");
+        file << server;
+        file.close();
+    }
     if (check_network_connection()) {
         std::cout << "Pass and check for updates..." << std::endl;
         std::filesystem::remove("./latest_version.txt");
-        std::string where = std::string("curl -s -L -O dingbangzheng.cn/twoc/") + std::to_string(x) + std::string(".y.z/latest_version.txt");
+        std::string where = std::string("curl -s -L -O " + server) + std::to_string(x) + std::string(".y.z/latest_version.txt");
         std::system(where.c_str());
         if (std::filesystem::exists("./version.txt")) {
             std::ifstream file("./version.txt");
@@ -77,7 +87,7 @@ int main() {
         if (ly > y || lz > z) {
             std::filesystem::remove("./updatedata.txt");
             std::cout << "Download updatedata..." << std::endl;
-            where = std::string("curl -s -L -O dingbangzheng.cn/twoc/") + std::to_string(x) + std::string(".y.z/updatedata.txt");
+            where = std::string("curl -s -L -O " + server) + std::to_string(x) + std::string(".y.z/updatedata.txt");
             std::system(where.c_str());
             if (std::filesystem::exists("./updatedata.txt")) {
                 std::ifstream file("./updatedata.txt");
@@ -91,7 +101,7 @@ int main() {
                         std::cout << ".dll\"." << std::endl;
                         std::filesystem::remove("./data/" + name + ".dll");
                         std::cout << "Download and install \"" << name << ".dll\"." << std::endl;
-                        where = std::string("curl -s -L -o ./data/" + name + ".dll dingbangzheng.cn/twoc/") + std::to_string(x) + std::string(".y.z/" + name + ".dll");
+                        where = std::string("curl -s -L -o ./data/" + name + ".dll " + server) + std::to_string(x) + std::string(".y.z/" + name + ".dll");
                         std::system(where.c_str());
                         std::ofstream file2("./logs.txt",std::ios::app);
                         timestamp = std::time(nullptr);
@@ -101,7 +111,7 @@ int main() {
                         std::cout << ".so\"." << std::endl;
                         std::filesystem::remove("./data/" + name + ".so");
                         std::cout << "Download and install \"" << name << ".so\"." << std::endl;
-                        where = std::string("curl -s -L -o ./data/" + name + ".so dingbangzheng.cn/twoc/") + std::to_string(x) + std::string(".y.z/" + name + ".so");
+                        where = std::string("curl -s -L -o ./data/" + name + ".so " + server) + std::to_string(x) + std::string(".y.z/" + name + ".so");
                         std::system(where.c_str());
                         std::ofstream file2("./logs.txt",std::ios::app);
                         timestamp = std::time(nullptr);
