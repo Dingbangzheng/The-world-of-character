@@ -54,7 +54,7 @@ int main(){
         data_server << server;
         data_server.close();
     }
-    if (check_network_connection()) {
+    if (check_network_connection() && server != "NO") {
         std::cout << "Pass and check for updates..." << std::endl;
         std::filesystem::remove("./last_version_y");
         std::filesystem::remove("./last_version_z");
@@ -78,28 +78,39 @@ int main(){
             file_last_version_y.close();
             std::sscanf(string_last_version_y.c_str() , "%d" , &ly);
             std::filesystem::remove("./last_version_y");
-            get = std::string("curl -s -L -O " + server) + std::to_string(x) + std::string(".y.z/.") + std::to_string(y) + std::string(".z/last_version_z");
-            std::system(get.c_str());
-            if (std::filesystem::exists("./last_version_z")) {
-                std::ifstream file_last_version_z("./last_version_z");
-            std::string string_last_version_z;
-            std::getline(file_last_version_z , string_last_version_z);
-            file_last_version_z.close();
-            std::sscanf(string_last_version_z.c_str() , "%d" , &lz);
-            std::filesystem::remove("./last_version_z");
+            if (ly == y){
+                get = std::string("curl -s -L -O " + server) + std::to_string(x) + std::string(".y.z/.") + std::to_string(y) + std::string(".z/last_version_z");
+                std::system(get.c_str());
+                if (std::filesystem::exists("./last_version_z")) {
+                    std::ifstream file_last_version_z("./last_version_z");
+                    std::string string_last_version_z;
+                    std::getline(file_last_version_z , string_last_version_z);
+                    file_last_version_z.close();
+                    std::sscanf(string_last_version_z.c_str() , "%d" , &lz);
+                    std::filesystem::remove("./last_version_z");
+                } else {
+                    std::ofstream logs("./logs",std::ios::app);
+                    timestamp = std::time(nullptr);
+                    logs << timestamp << "-ERROR[From=launcher,ID=1]:Can not find \"last_version_z\" or there is no \"curl\" command." << std::endl;
+                    logs.close();
+                    std::cout << "ERROR[From=launcher,ID=1]:Can not find \"last_version_z\" or there is no \"curl\" command." << std::endl;
+                }
+                if (lz > z){
+                    //todo
+                    z = lz;
+                }
+            } else {
+                //todo
             }
         } else {
             std::ofstream logs("./logs",std::ios::app);
             timestamp = std::time(nullptr);
-            logs << timestamp << "-ERROR[From=launcher,ID=1]:Can not find \"latest_version_y\" or there is no \"curl\" command." << std::endl;
+            logs << timestamp << "-ERROR[From=launcher,ID=1]:Can not find \"last_version_y\" or there is no \"curl\" command." << std::endl;
             logs.close();
-            std::cout << "ERROR[From=launcher,ID=1]:Can not find \"latest_version_y\" or there is no \"curl\" command." << std::endl;
+            std::cout << "ERROR[From=launcher,ID=1]:Can not find \"last_version_y\" or there is no \"curl\" command." << std::endl;
         }
-        if (ly > y || lz > z) {
-            std::filesystem::remove("./updatedata");
-            std::cout << "Download updatedata..." << std::endl;
-            //todo
-        }
+    } else {
+        std::cout << "No network connection or update disabled" << std::endl;
     } 
     showcursor();
     return 0;
