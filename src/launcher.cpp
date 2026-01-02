@@ -58,7 +58,7 @@ int main(){
         std::cout << "Pass and check for updates..." << std::endl;
         std::filesystem::remove("./last_version_y");
         std::filesystem::remove("./last_version_z");
-        if (std::filesystem::exists("./version")){
+        if (std::filesystem::exists("./version")) {
             std::ifstream file_version("./version");
             std::string string_version;
             std::getline(file_version , string_version);
@@ -78,7 +78,7 @@ int main(){
             file_last_version_y.close();
             std::sscanf(string_last_version_y.c_str() , "%d" , &ly);
             std::filesystem::remove("./last_version_y");
-            if (ly == y){
+            if (ly == y) {
                 get = std::string("curl -s -L -O " + server) + std::to_string(x) + std::string(".y.z/.") + std::to_string(y) + std::string(".z/last_version_z");
                 std::system(get.c_str());
                 if (std::filesystem::exists("./last_version_z")) {
@@ -95,8 +95,21 @@ int main(){
                     logs.close();
                     std::cout << "ERROR[From=launcher,ID=1]:Can not find \"last_version_z\" or there is no \"curl\" command." << std::endl;
                 }
-                if (lz > z){
-                    //todo
+                if (lz > z) {
+                    std::filesystem::remove("./updatedata.txt");
+                    std::cout << "Download updatedata..." << std::endl;
+                    get = std::string("curl -s -L -O " + server) + std::to_string(x) + std::string(".y.z/.") + std::to_string(y) + std::string(".z/updatedata");
+                    std::system(get.c_str());
+                    if (std::filesystem::exists("./updatedata")) {
+                        std::ifstream update("./updatedata");
+                        std::string name;
+                        while (std::getline(update , name)) {
+                            if (!name.empty() && name.back() == '\r') {//去除Windows文件的\r，因为服务器是Windows
+                                name.pop_back();
+                            }
+                            //todo
+                        }
+                    }
                     z = lz;
                 }
             } else {

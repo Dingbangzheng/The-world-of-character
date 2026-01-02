@@ -130,8 +130,6 @@ int main() {
                 std::ofstream file3("./version.txt");
                 file3 << "." << y << "." << z << std::endl;
                 file3.close();
-            } else {
-                std::ofstream file("./logs.txt",std::ios::app);
                 timestamp = std::time(nullptr);
                 file << timestamp << "-ERROR[From=launcher,ID=2]:Can not find \"updatedata.txt\" or there is no \"curl\" command." << std::endl;
                 file.close();
