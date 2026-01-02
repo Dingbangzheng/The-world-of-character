@@ -96,7 +96,7 @@ int main(){
                     std::cout << "ERROR[From=launcher,ID=1]:Can not find \"last_version_z\" or there is no \"curl\" command." << std::endl;
                 }
                 if (lz > z) {
-                    std::filesystem::remove("./updatedata.txt");
+                    std::filesystem::remove("./updatedata");
                     std::cout << "Download updatedata..." << std::endl;
                     get = std::string("curl -s -L -O " + server) + std::to_string(x) + std::string(".y.z/.") + std::to_string(y) + std::string(".z/updatedata");
                     std::system(get.c_str());
@@ -104,12 +104,14 @@ int main(){
                         std::ifstream update("./updatedata");
                         std::string name;
                         while (std::getline(update , name)) {
-                            if (!name.empty() && name.back() == '\r') {//去除Windows文件的\r，因为服务器是Windows
+                            if (!name.empty() && name.back() == '\r') {//去除Windows文件中的\r，因为服务器是Windows
                                 name.pop_back();
                             }
                             //todo
                         }
+                        update.close();
                     }
+                    std::filesystem::remove("./updatedata");
                     z = lz;
                 }
             } else {
