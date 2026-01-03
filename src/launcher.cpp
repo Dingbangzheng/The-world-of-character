@@ -97,6 +97,7 @@ int main(){
                 }
                 if (lz > z) {
                     std::filesystem::remove("./updatedata");
+                    std::cout << "\033[93;40mThe game is being updated. Please maintain an internet connection; otherwise, unexpected errors may occur.\033[0m" << std::endl;
                     std::cout << "Download updatedata..." << std::endl;
                     get = std::string("curl -s -L -O " + server) + std::to_string(x) + std::string(".y.z/.") + std::to_string(y) + std::string(".z/updatedata");
                     std::system(get.c_str());
@@ -110,11 +111,17 @@ int main(){
                             //todo
                         }
                         update.close();
+                    } else {
+                        std::ofstream logs("./logs",std::ios::app);
+                        timestamp = std::time(nullptr);
+                        logs << timestamp << "-ERROR[From=launcher,ID=1]:Can not find \"updatedata\" or there is no \"curl\" command." << std::endl;
+                        logs.close();
+                        std::cout << "ERROR[From=launcher,ID=1]:Can not find \"updatedata\" or there is no \"curl\" command." << std::endl;
                     }
                     std::filesystem::remove("./updatedata");
                     z = lz;
                 }
-            } else {
+            } else if(ly > y) {
                 //todo
             }
         } else {
@@ -122,11 +129,12 @@ int main(){
             timestamp = std::time(nullptr);
             logs << timestamp << "-ERROR[From=launcher,ID=1]:Can not find \"last_version_y\" or there is no \"curl\" command." << std::endl;
             logs.close();
-            std::cout << "ERROR[From=launcher,ID=1]:Can not find \"last_version_y\" or there is no \"curl\" command." << std::endl;
+            std::cout << "\033[31;40mERROR[From=launcher,ID=1]:Can not find \"last_version_y\" or there is no \"curl\" command.\033[0m" << std::endl;
         }
     } else {
-        std::cout << "No network connection or update disabled" << std::endl;
-    } 
+        std::cout << "\033[93;40mNo network connection or update disabled\033[0m" << std::endl;
+    }
+    //todo
     showcursor();
     return 0;
 }
