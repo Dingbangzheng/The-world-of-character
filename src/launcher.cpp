@@ -104,7 +104,7 @@ int main(){
                         std::ifstream update("./updatedata");
                         std::string name;
                         while (std::getline(update , name)) {
-                            if (!name.empty() && name.back() == '\r') {//去除Windows文件中的\r，因为服务器是Windows
+                            if (!name.empty() && name.back() == '\r') {//去除Windows文件中的\r
                                 name.pop_back();
                             }
                             //todo
