@@ -5,8 +5,8 @@ help:
 	@echo "make all -- Compile all projects."
 	@echo "make launcher -- Only compile launcher."
 	@echo "make library -- Only compile the dynamic link library."
-	@echo "make clean -- Clean up the compiled files(./game/*)."
-	@echo "PS:The compiled files are placed in the "./game/" directory."
+	@echo "make clean -- Clean up the compiled files(./build/*)."
+	@echo "PS:The compiled files are placed in the "./build/" directory."
 
 all:
 	$(MAKE) launcher
@@ -14,27 +14,27 @@ all:
 
 launcher: ./src/screen.h ./src/launcher.cpp
 ifeq ($(OS),Windows_NT)
-	@if not exist .\game mkdir .\game
-	g++ -std=c++17 -lpsapi .\src\launcher.cpp -o .\game\launcher.exe
+	@if not exist .\build mkdir .\build
+	g++ -std=c++17 -lpsapi .\src\launcher.cpp -o .\build\launcher.exe
 else
-	@if [ ! -d ./game ]; then mkdir -p ./game; fi
-	g++ -std=c++17 -rdynamic -ldl ./src/launcher.cpp -o ./game/launcher
+	@if [ ! -d ./build ]; then mkdir -p ./build; fi
+	g++ -std=c++17 -rdynamic -ldl ./src/launcher.cpp -o ./build/launcher
 endif
 
 library: ./src/screen.h ./src/game.cpp
 ifeq ($(OS),Windows_NT)
-	@if not exist .\game\data mkdir .\game\data
-	g++ -std=c++17 -shared -lpsapi -o .\game\data\game.dll .\src\game.cpp
+	@if not exist .\build\data mkdir .\build\data
+	g++ -std=c++17 -shared -lpsapi -o .\build\data\game.dll .\src\game.cpp
 else
-	@if [ ! -d ./game/data ]; then mkdir -p ./game/data; fi
-	g++ -std=c++17 -shared -ldl -fPIC -o ./game/data/game.so ./src/game.cpp
+	@if [ ! -d ./build/data ]; then mkdir -p ./build/data; fi
+	g++ -std=c++17 -shared -ldl -fPIC -o ./build/data/game.so ./src/game.cpp
 endif
 
 clean:
 ifeq ($(OS),Windows_NT)
-	if exist .\game rmdir /s /q .\game
+	if exist .\build rmdir /s /q .\build
 else
-	rm -rf ./game/
+	rm -rf ./build/
 endif
 
 .PHONY: help all launcher library clean
