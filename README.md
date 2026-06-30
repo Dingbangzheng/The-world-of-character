@@ -1,6 +1,5 @@
 # ❗Attention
-Note that this project has been abandoned. 
-You can take a look at my new project IceTeaOS instead.
+Note that this project has been abandoned. You can take a look at my new project IceTeaOS instead.
 # The-world-of-character  
 The-world-of-character is an open-world 2D character game that supports hot updates.  
 # Compatibility  
